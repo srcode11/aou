@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Site Title -->
+  <title>Dashboard | AOU Study Tracker</title>
+  
+  <!-- SEO Metadata -->
+  <meta name="description" content="Access your personalized dashboard on AOU Study Tracker. View your progress, schedule, and enrolled courses." />
+  <meta name="keywords" content="Dashboard, AOU, Study Plan, Academic Progress" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  
+  <!-- Fonts & Stylesheets -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .cal-day-cell:hover {
+      background-color: #eff6ff;
+      border-radius: 6px;
+    }
+
+    .cal-day-cell.today {
+      background-color: #dbeafe;
+      border-radius: 6px;
+      font-weight: 600;
+      color: #1d4ed8;
+    }
+
+    .progress-bar-fill {
+      transition: width 0.6s ease;
+    }
+
+    .time-grid {
+      max-height: 260px;
+      overflow-y: auto;
+      border: 2px solid #111827;
+      border-radius: 8px;
+    }
+
+    .time-grid::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .time-grid::-webkit-scrollbar-thumb {
+      background: #9ca3af;
+      border-radius: 4px;
+    }
+
+    .tab-active {
+      background-color: #2563eb;
+      color: #fff;
+    }
+
+    .tab-inactive {
+      border: 1px solid #e5e7eb;
+      color: #4b5563;
+      background: #fff;
+    }
+
+    .tab-inactive:hover {
+      background: #f9fafb;
+    }
+
+    .week-col-today {
+      background-color: #eff6ff;
+    }
+
+    .time-row {
+      border-bottom: 2px solid #374151;
+    }
+
+    .time-row:last-child {
+      border-bottom: none;
+    }
+
+    .time-col-sep {
+      border-right: 2px solid #374151;
+    }
+
+    .time-header-row {
+      border-bottom: 2px solid #111827;
+      background: #f9fafb;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="home.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <img src="img/logo.png" alt="AOU Logo" class="w-9 h-9 rounded-full object-cover" />
+        <span class="font-bold text-gray-800 text-lg">AOU Study Tracker</span>
+      </a>
+      <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="home.html" class="flex items-center gap-1.5 text-blue-600 font-semibold">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          Dashboard
+        </a>
+        <a href="courses.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          Courses
+        </a>
+        <a href="index.html" class="flex items-center gap-1.5 hover:text-red-500 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-6 py-6">
+
+    <!-- Welcome Banner -->
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl px-8 py-6 mb-6 text-white shadow-md">
+      <h1 class="text-2xl font-bold mb-1">Welcome Back! 👋</h1>
+      <p class="text-blue-100 text-sm">Track your progress and stay on top of your studies</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <!-- Overall Progress -->
+      <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm font-medium text-gray-500">Overall Progress</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+        <p id="overallProgressText" class="text-3xl font-bold text-gray-800 mb-3">0%</p>
+        <div class="w-full bg-gray-100 rounded-full h-1.5">
+          <div id="overallProgressBar" class="bg-blue-500 h-1.5 rounded-full progress-bar-fill" style="width: 0%"></div>
+        </div>
+      </div>
+      <!-- Active Courses -->
+      <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm font-medium text-gray-500">Active Courses</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <p class="text-3xl font-bold text-gray-800 mb-1" id="enrolledCount">0</p>
+        <p class="text-sm text-gray-400">Enrolled courses</p>
+      </div>
+      <!-- Upcoming Events -->
+      <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm font-medium text-gray-500">Upcoming Events</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <p class="text-3xl font-bold text-gray-800 mb-1">3</p>
+        <p class="text-sm text-gray-400">Deadlines &amp; exams</p>
+      </div>
+    </div>
+
+    <!-- Bottom Grid: Calendar + My Courses -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Calendar -->
+      <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold text-gray-800">Calendar</h2>
+          <button id="addEventBtn"
+            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+            Add Event
+          </button>
+        </div>
+
+        <!-- Calendar Controls -->
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <div class="flex gap-1">
+            <button onclick="calGoToday()"
+              class="text-xs tab-inactive px-3 py-1.5 rounded-md font-medium">Today</button>
+            <button onclick="calNav(-1)" class="text-xs tab-inactive px-3 py-1.5 rounded-md font-medium">Back</button>
+            <button onclick="calNav(1)" class="text-xs tab-inactive px-3 py-1.5 rounded-md font-medium">Next</button>
+          </div>
+          <span id="calendarTitle" class="text-sm font-semibold text-gray-700"></span>
+          <div class="flex gap-1">
+            <button id="tab-month" onclick="setView('month')"
+              class="text-xs px-3 py-1.5 rounded-md font-medium tab-active">Month</button>
+            <button id="tab-week" onclick="setView('week')"
+              class="text-xs px-3 py-1.5 rounded-md font-medium tab-inactive">Week</button>
+            <button id="tab-day" onclick="setView('day')"
+              class="text-xs px-3 py-1.5 rounded-md font-medium tab-inactive">Day</button>
+            <button id="tab-agenda" onclick="setView('agenda')"
+              class="text-xs px-3 py-1.5 rounded-md font-medium tab-inactive">Agenda</button>
+          </div>
+        </div>
+
+        <!-- Calendar Body -->
+        <div id="calendarBody"></div>
+      </div>
+
+      <!-- My Courses -->
+      <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-lg font-bold text-gray-800">My Courses</h2>
+          <a href="courses.html" class="text-sm text-blue-600 hover:underline font-medium">View All →</a>
+        </div>
+
+        <div class="flex flex-col gap-5" id="homeCoursesList">
+          <!-- سيتم التعبئة بواسطة JavaScript -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Add Event Modal -->
+  <div id="eventModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-gray-800">Add Event</h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <form onsubmit="addEvent(event)" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Event Title</label>
+          <input type="text" id="eventTitle"
+            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm"
+            placeholder="e.g. Math Exam" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+          <input type="date" id="eventDate"
+            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm"
+            required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+          <select id="eventType"
+            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm">
+            <option value="exam">Exam</option>
+            <option value="deadline">Deadline</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <button type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors text-sm">
+          Add Event
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic for Calendar and Progress -->
+  <script>
+    const today = new Date();
+    let curDate = new Date();
+    let curView = 'month';
+
+    // ── localStorage JSON storage ──────────────────────────────
+    const STORAGE_KEY = 'aou_calendar_events';
+    let events = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    function saveEvents() { localStorage.setItem(STORAGE_KEY, JSON.stringify(events)); }
+
+    const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const DAYS_FULL = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    // ── helpers ──────────────────────────────────────────────
+    const pad2 = n => String(n).padStart(2, '0');
+    const fmtDate = d => `${pad2(d.getMonth() + 1)}/${pad2(d.getDate())}/${d.getFullYear()}`;
+    function sameDay(a, b) { return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+    function eventKey(y, m, d) { return `${y}-${m}-${d}`; }
+    function getEvents(y, m, d) { return events[eventKey(y, m, d)] || []; }
+
+    // generate 24-h time labels
+    function timeLabels() {
+      const h = [];
+      for (let i = 0; i < 24; i++) {
+        const ampm = i < 12 ? 'AM' : 'PM';
+        const hr = i === 0 ? 12 : i > 12 ? i - 12 : i;
+        h.push(`${hr}:00 ${ampm}`);
+      }
+      return h;
+    }
+
+    // ── tab switching ──────────────────────────────────────────
+    function setView(v) {
+      curView = v;
+      ['month', 'week', 'day', 'agenda'].forEach(tab => {
+        const btn = document.getElementById('tab-' + tab);
+        btn.className = `text-xs px-3 py-1.5 rounded-md font-medium ${tab === v ? 'tab-active' : 'tab-inactive'}`;
+      });
+      render();
+    }
+
+    // ── navigation ─────────────────────────────────────────────
+    function calNav(dir) {
+      if (curView === 'month') {
+        curDate.setMonth(curDate.getMonth() + dir);
+      } else if (curView === 'week') {
+        curDate.setDate(curDate.getDate() + dir * 7);
+      } else if (curView === 'day') {
+        curDate.setDate(curDate.getDate() + dir);
+      } else if (curView === 'agenda') {
+        curDate.setDate(curDate.getDate() + dir * 30);
+      }
+      render();
+    }
+    function calGoToday() { curDate = new Date(); render(); }
+
+    // ── main render dispatcher ─────────────────────────────────
+    function render() {
+      if (curView === 'month') renderMonth();
+      else if (curView === 'week') renderWeek();
+      else if (curView === 'day') renderDay();
+      else if (curView === 'agenda') renderAgenda();
+    }
+
+    // ── MONTH VIEW ─────────────────────────────────────────────
+    function renderMonth() {
+      const y = curDate.getFullYear(), m = curDate.getMonth();
+      document.getElementById('calendarTitle').textContent = `${MONTHS[m]} ${y}`;
+
+      const firstDay = new Date(y, m, 1).getDay();
+      const daysInMonth = new Date(y, m + 1, 0).getDate();
+      const prevDays = new Date(y, m, 0).getDate();
+
+      let html = `<div class="grid grid-cols-7 mb-1">`;
+      DAYS.forEach(d => { html += `<div class="text-center text-xs font-semibold text-gray-400 py-1">${d}</div>`; });
+      html += `</div><div class="grid grid-cols-7 gap-y-1">`;
+
+      // prev month pad
+      for (let i = firstDay - 1; i >= 0; i--) {
+        html += `<div class="text-center py-1.5 text-xs text-gray-300">${prevDays - i}</div>`;
+      }
+      // current month
+      for (let d = 1; d <= daysInMonth; d++) {
+        const isTd = (d === today.getDate() && m === today.getMonth() && y === today.getFullYear());
+        const evs = getEvents(y, m, d);
+        const dot = evs.length ? `<span class="block w-1 h-1 bg-blue-500 rounded-full mx-auto mt-0.5"></span>` : '';
+        html += `<div class="cal-day-cell text-center py-1.5 text-xs cursor-pointer relative ${isTd ? 'today' : 'text-gray-700'}">${d}${dot}</div>`;
+      }
+      // next month pad
+      const total = firstDay + daysInMonth;
+      const rem = total % 7 === 0 ? 0 : 7 - (total % 7);
+      for (let i = 1; i <= rem; i++) {
+        html += `<div class="text-center py-1.5 text-xs text-gray-300">${i}</div>`;
+      }
+      html += `</div>`;
+      document.getElementById('calendarBody').innerHTML = html;
+    }
+
+    // ── WEEK VIEW ──────────────────────────────────────────────
+    function renderWeek() {
+      const sun = new Date(curDate);
+      sun.setDate(curDate.getDate() - curDate.getDay());
+      const sat = new Date(sun); sat.setDate(sun.getDate() + 6);
+
+      document.getElementById('calendarTitle').textContent =
+        `${MONTHS[sun.getMonth()]} ${pad2(sun.getDate())} – ${pad2(sat.getDate())}`;
+
+      // column headers
+      let cols = `<div class="grid" style="grid-template-columns:56px repeat(7,1fr); border:2px solid #111827; border-bottom:none; border-radius:8px 8px 0 0; background:#f9fafb;">`;
+      cols += `<div class="border-r-2 border-gray-800"></div>`;
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(sun); d.setDate(sun.getDate() + i);
+        const isT = sameDay(d, today);
+        cols += `<div class="text-center py-1.5 border-r-2 border-gray-800 last:border-r-0 ${isT ? 'bg-blue-50 font-semibold text-blue-700' : 'text-gray-600'}">
+          <div class="text-xs">${pad2(d.getDate())} ${DAYS[i]}</div>
+        </div>`;
+      }
+      cols += `</div>`;
+
+      // time rows
+      let rows = `<div class="time-grid" style="border-radius:0 0 8px 8px;">`;
+      timeLabels().forEach(lbl => {
+        rows += `<div class="time-row grid" style="grid-template-columns:56px repeat(7,1fr); min-height:28px">`;
+        rows += `<div class="time-col-sep text-right pr-2 text-xs text-gray-500 py-1 font-medium">${lbl}</div>`;
+        for (let i = 0; i < 7; i++) {
+          const d = new Date(sun); d.setDate(sun.getDate() + i);
+          const isT = sameDay(d, today);
+          rows += `<div class="time-col-sep ${isT ? 'week-col-today' : ''} ${i === 6 ? 'border-r-0' : ''}"></div>`;
+        }
+        rows += `</div>`;
+      });
+      rows += `</div>`;
+
+      document.getElementById('calendarBody').innerHTML = cols + rows;
+    }
+
+    // ── DAY VIEW ───────────────────────────────────────────────
+    function renderDay() {
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const shortMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const d = curDate;
+      document.getElementById('calendarTitle').textContent =
+        `${dayNames[d.getDay()]} ${shortMonths[d.getMonth()]} ${pad2(d.getDate())}`;
+
+      const isT = sameDay(d, today);
+
+      // header
+      let html = `<div style="border:2px solid #111827; border-bottom:none; border-radius:8px 8px 0 0; background:#f9fafb;">
+        <div class="grid" style="grid-template-columns:56px 1fr; border-bottom:2px solid #111827;">
+          <div class="border-r-2 border-gray-800 py-1"></div>
+          <div class="${isT ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600'} text-center py-1.5 text-xs">${dayNames[d.getDay()]}</div>
+        </div>
+      </div>`;
+
+      html += `<div class="time-grid" style="border-radius:0 0 8px 8px;">`;
+      timeLabels().forEach(lbl => {
+        html += `<div class="time-row grid" style="grid-template-columns:56px 1fr; min-height:30px">`;
+        html += `<div class="time-col-sep text-right pr-2 text-xs text-gray-500 py-1 font-medium">${lbl}</div>`;
+        html += `<div class="${isT ? 'week-col-today' : ''}"></div>`;
+        html += `</div>`;
+      });
+
+      // events
+      const evs = getEvents(d.getFullYear(), d.getMonth(), d.getDate());
+      evs.forEach(ev => {
+        html += `<div class="mx-2 mt-1 px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">${ev.title}</div>`;
+      });
+      html += `</div>`;
+
+      document.getElementById('calendarBody').innerHTML = html;
+    }
+
+    // ── AGENDA VIEW ────────────────────────────────────────────
+    function renderAgenda() {
+      const start = new Date(curDate);
+      const end = new Date(curDate); end.setDate(end.getDate() + 29);
+      document.getElementById('calendarTitle').textContent =
+        `${fmtDate(start)} – ${fmtDate(end)}`;
+
+      let found = [];
+      for (let i = 0; i < 30; i++) {
+        const d = new Date(start); d.setDate(start.getDate() + i);
+        const evs = getEvents(d.getFullYear(), d.getMonth(), d.getDate());
+        evs.forEach(ev => found.push({ date: new Date(d), ev }));
+      }
+
+      let html = '';
+      if (!found.length) {
+        html = `<p class="text-sm text-gray-400 py-4">There are no events in this range.</p>`;
+      } else {
+        found.forEach(({ date, ev }) => {
+          const badge = ev.type === 'exam' ? 'bg-red-100 text-red-700' : ev.type === 'deadline' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700';
+          html += `<div class="flex items-center gap-3 py-2 border-b border-gray-100">
+            <span class="text-xs text-gray-400 w-20 flex-shrink-0">${fmtDate(date)}</span>
+            <span class="px-2 py-0.5 rounded-full text-xs font-medium ${badge}">${ev.title}</span>
+          </div>`;
+        });
+      }
+      document.getElementById('calendarBody').innerHTML = html;
+    }
+
+    // ── event add ──────────────────────────────────────────────
+    function addEvent(e) {
+      e.preventDefault();
+      const dateVal = document.getElementById('eventDate').value;
+      const title = document.getElementById('eventTitle').value.trim();
+      const type = document.getElementById('eventType').value;
+      if (dateVal && title) {
+        const [y, m, d] = dateVal.split('-').map(Number);
+        const key = eventKey(y, m - 1, d);
+        if (!events[key]) events[key] = [];
+        events[key].push({ title, type });
+        saveEvents();   // ← persist to localStorage
+        render();
+      }
+      closeModal();
+      document.getElementById('eventTitle').value = '';
+    }
+
+    function closeModal() {
+      document.getElementById('eventModal').classList.add('hidden');
+    }
+    document.getElementById('addEventBtn').addEventListener('click', () => {
+      document.getElementById('eventModal').classList.remove('hidden');
+    });
+    document.getElementById('eventModal').addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+
+    render();
+
+    // ── PROGRESS TRACKING FROM BACKEND ──────────────────────────────
+    async function loadCourseProgress() {
+      let selectedIds = JSON.parse(localStorage.getItem('aou_selected_courses'));
+      const defaultCourses = ['MT101', 'M109', 'M251', 'TM103', 'MT131', 'MT132'];
+      if (!selectedIds) {
+        selectedIds = defaultCourses;
+        localStorage.setItem('aou_selected_courses', JSON.stringify(defaultCourses));
+      }
+
+      const enrolledLabel = document.getElementById('enrolledCount');
+      if (enrolledLabel) enrolledLabel.textContent = selectedIds.length;
+
+      try {
+        const response = await fetch(`${API_URL}/api/subjects`);
+        const allCourses = await response.json();
+        const courses = allCourses.filter(c => selectedIds.includes(c.name));
+        const listContainer = document.getElementById('homeCoursesList');
+        
+        if (listContainer) {
+          if (courses.length === 0) {
+            listContainer.innerHTML = '<p class="text-xs text-gray-400 text-center py-4 italic">No courses selected.</p>';
+          } else {
+            listContainer.innerHTML = courses.map(course => {
+              const id = course.name;
+              const topics = course.totalQuestions;
+              const completed = JSON.parse(localStorage.getItem(`aou_progress_${id}`) || '[]');
+              const count = completed.length;
+              const percent = topics > 0 ? Math.round((count / topics) * 100) : 0;
+              return `
+                <a href="course-details.html?id=${id}" class="flex items-start gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all group">
+                  <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                      <p class="text-sm font-bold text-gray-800 truncate max-w-[150px]">${course.description}</p>
+                      <span class="text-[9px] font-black text-gray-300 uppercase tracking-widest">${id}</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="flex-1 bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-blue-600 h-full transition-all duration-1000" style="width: ${percent}%"></div>
+                      </div>
+                      <span class="text-[10px] text-gray-500 font-black">${percent}%</span>
+                    </div>
+                  </div>
+                </a>
+              `;
+            }).join('');
+          }
+        }
+
+        let totalCompleted = 0;
+        let totalTopics = 0;
+
+        for (const course of courses) {
+          const id = course.name;
+          const topics = course.totalQuestions;
+          const completed = JSON.parse(localStorage.getItem(`aou_progress_${id}`) || '[]');
+          totalCompleted += completed.length;
+          totalTopics += topics;
+        }
+
+        const overallPercent = totalTopics > 0 ? Math.round((totalCompleted / totalTopics) * 100) : 0;
+        const overallText = document.getElementById('overallProgressText');
+        const overallBar = document.getElementById('overallProgressBar');
+        if (overallText) overallText.textContent = `${overallPercent}%`;
+        if (overallBar) overallBar.style.width = `${overallPercent}%`;
+      } catch (err) {
+        console.error("Error loading progress:", err);
+      }
+    }
+
+    // Call on load
+    loadCourseProgress();
+  </script>
+
+</body>
+</html>

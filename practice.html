@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initia<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Site Title -->
+  <title>Practice Questions | AOU Study Tracker</title>
+  
+  <!-- SEO Metadata -->
+  <meta name="description" content="Test your knowledge and practice for exams with our MCQ and long question banks." />
+  <meta name="keywords" content="Practice, Exam Prep, MCQ, Long Questions" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  
+  <!-- Stylesheets & Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .ai-gradient { background: linear-gradient(135deg, #374151 0%, #111827 100%); }
+  </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="home.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <img src="img/logo.png" alt="AOU Logo" class="w-9 h-9 rounded-full object-cover" />
+        <span class="font-bold text-gray-800 text-lg">AOU Study Tracker</span>
+      </a>
+      <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="home.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          Dashboard
+        </a>
+        <a href="courses.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Courses
+        </a>
+        <a href="index.html" class="flex items-center gap-1.5 hover:text-red-500 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    
+    <!-- Back Button -->
+    <a id="backBtn" href="#" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors mb-6 group">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Back to Course Details
+    </a>
+
+    <!-- Header Card -->
+    <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm mb-6">
+      <h1 class="text-3xl font-bold text-gray-900 mb-1">Practice Questions</h1>
+      <p id="courseName" class="text-lg text-gray-500 mb-6">Loading Course...</p>
+      
+      <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-center justify-between">
+        <span class="text-sm font-medium text-blue-700" id="progressText">Loading progress...</span>
+      </div>
+    </div>
+
+    <!-- Question Types Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <!-- MCQ Card -->
+      <a id="mcqLink" href="#" class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all cursor-pointer group block relative overflow-hidden">
+        <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-50 rounded-full opacity-50 group-hover:scale-150 transition-transform"></div>
+        <div class="relative z-10">
+          <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-100 group-hover:rotate-6 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">MCQ Questions</h2>
+          <p class="text-sm text-gray-400 mb-8 leading-relaxed">Boost your knowledge with quick multiple choice questions and instant feedback.</p>
+          <div class="flex items-center justify-between pt-6 border-t border-gray-50">
+            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Available Questions</span>
+            <div id="mcqCount" class="bg-gray-100 text-gray-400 px-4 py-1 rounded-full text-lg font-black">-</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Long Questions Card -->
+      <a id="longLink" href="long-questions.html" class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:border-purple-200 transition-all cursor-pointer group block relative overflow-hidden">
+        <div class="absolute -right-4 -top-4 w-24 h-24 bg-purple-50 rounded-full opacity-50 group-hover:scale-150 transition-transform"></div>
+        <div class="relative z-10">
+          <div class="w-14 h-14 bg-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-purple-100 group-hover:rotate-6 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Long Questions</h2>
+          <p class="text-sm text-gray-400 mb-8 leading-relaxed">Prepare for essay-style exams with comprehensive detailed answer prompts.</p>
+          <div class="flex items-center justify-between pt-6 border-t border-gray-50">
+            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Available Questions</span>
+            <div id="longCount" class="bg-gray-100 text-gray-400 px-4 py-1 rounded-full text-lg font-black">-</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- AI Practice Mode (Locked) -->
+    <div class="ai-gradient rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
+      <div class="relative z-10">
+        <div class="flex items-start justify-between mb-8">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold mb-1">AI Practice Mode</h2>
+              <p class="text-gray-400 text-sm max-w-lg">Complete all questions with 100% course progress to unlock AI-generated practice questions.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-white/10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span class="text-xs font-bold uppercase tracking-widest">Locked</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-5 h-5 rounded-full border-2 border-white/20 flex items-center justify-center flex-shrink-0"></div>
+            <span class="text-white/80">Complete course progress (Currently: <span id="currentProgress">0%</span>)</span>
+          </div>
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-5 h-5 rounded-full border-2 border-white/20 flex items-center justify-center flex-shrink-0"></div>
+            <span class="text-white/80">Complete all questions (<span id="completedCount">0</span>/<span id="totalQuestionsCount">0</span>)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative Brain Shadow -->
+      <svg class="absolute -right-20 -bottom-20 w-80 h-80 text-white/5" fill="currentColor" viewBox="0 0 24 24"><path d="M13,3C9.23,3,6.19,5.95,6,9.66C4.27,10.12,3,11.66,3,13.5c0,2,1.5,3.5,3.5,3.5h0.1c0.55,2.83,3.04,5,6.04,5c2.4,0,4.52-1.39,5.5-3.41 c0.16,0.01,0.33,0.02,0.5,0.02c2.4,0,4.4-1.61,4.92-3.8c1.32-0.5,2.22-1.78,2.22-3.2c0-1.88-1.48-3.41-3.34-3.49 C21.49,5.32,17.74,3,13,3z"/></svg>
+    </div>
+
+  </main>
+
+  <!-- JavaScript logic for fetching course data and updating links -->
+  <script>
+    async function initPractice() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const courseId = urlParams.get('id');
+
+      if (!courseId) {
+        window.location.href = 'courses.html';
+        return;
+      }
+
+      // Update Navigation Links
+      document.getElementById('backBtn').href = `course-details.html?id=${courseId}`;
+      document.getElementById('mcqLink').href = `mcq.html?id=${courseId}`;
+      document.getElementById('longLink').href = `long-questions.html?id=${courseId}`;
+
+      try {
+        // Get course info
+        const courseRes = await fetch(`${API_URL}/api/subjects/${courseId}`);
+        const course = await courseRes.json();
+        if (course && !course.error) {
+          document.getElementById('courseName').textContent = course.description || course.name;
+        }
+
+        // Get all questions
+        const questionsRes = await fetch(`${API_URL}/api/questions/subject/${courseId}`);
+        const allQuestions = await questionsRes.json();
+        
+        // Count MCQ and Long questions
+        const mcqQuestions = allQuestions.filter(q => q.options && q.options.length > 0);
+        const longQuestions = allQuestions.filter(q => !q.options || q.options.length === 0);
+        
+        document.getElementById('mcqCount').textContent = mcqQuestions.length;
+        document.getElementById('longCount').textContent = longQuestions.length;
+        document.getElementById('totalQuestionsCount').textContent = allQuestions.length;
+        
+        // Load Progress from backend
+        const progressRes = await fetch(`${API_URL}/api/progress/student123/${courseId}`);
+        const progress = await progressRes.json();
+        const percent = progress.percent || 0;
+        const completed = progress.answered || 0;
+        
+        document.getElementById('currentProgress').textContent = `${percent}%`;
+        document.getElementById('completedCount').textContent = completed;
+        document.getElementById('progressText').textContent = `Progress: ${completed} / ${allQuestions.length} questions completed (${percent}%)`;
+        
+      } catch (err) {
+        console.error("Error loading practice data:", err);
+        document.getElementById('progressText').textContent = "Error loading progress. Make sure backend is running.";
+      }
+    }
+
+    initPractice();
+  </script>
+
+</body>
+</html>l-scale=1.0" />
+  
+  <!-- Site Title -->
+  <title>Practice Questions | AOU Study Tracker</title>
+  
+  <!-- SEO Metadata -->
+  <meta name="description" content="Test your knowledge and practice for exams with our MCQ and long question banks." />
+  <meta name="keywords" content="Practice, Exam Prep, MCQ, Long Questions" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  
+  <!-- Stylesheets & Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .ai-gradient { background: linear-gradient(135deg, #374151 0%, #111827 100%); }
+  </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="home.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <img src="img/logo.png" alt="AOU Logo" class="w-9 h-9 rounded-full object-cover" />
+        <span class="font-bold text-gray-800 text-lg">AOU Study Tracker</span>
+      </a>
+      <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="home.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          Dashboard
+        </a>
+        <a href="courses.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Courses
+        </a>
+        <a href="index.html" class="flex items-center gap-1.5 hover:text-red-500 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    
+    <!-- Back Button -->
+    <a id="backBtn" href="#" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors mb-6 group">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Back to Course Details
+    </a>
+
+    <!-- Header Card -->
+    <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm mb-6">
+      <h1 class="text-3xl font-bold text-gray-900 mb-1">Practice Questions</h1>
+      <p id="courseName" class="text-lg text-gray-500 mb-6">Loading Course...</p>
+      
+      <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-center justify-between">
+        <span class="text-sm font-medium text-blue-700">Progress: 0 / 2 questions completed</span>
+      </div>
+    </div>
+
+    <!-- Question Types Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <!-- MCQ Card -->
+      <a id="mcqLink" href="#" class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all cursor-pointer group block relative overflow-hidden">
+        <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-50 rounded-full opacity-50 group-hover:scale-150 transition-transform"></div>
+        <div class="relative z-10">
+          <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-100 group-hover:rotate-6 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">MCQ Questions</h2>
+          <p class="text-sm text-gray-400 mb-8 leading-relaxed">Boost your knowledge with quick multiple choice questions and instant feedback.</p>
+          <div class="flex items-center justify-between pt-6 border-t border-gray-50">
+            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Available Questions</span>
+            <div class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-lg font-black">2</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Long Questions Card -->
+      <a id="longLink" href="long-questions.html" class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:border-purple-200 transition-all cursor-pointer group block relative overflow-hidden">
+        <div class="absolute -right-4 -top-4 w-24 h-24 bg-purple-50 rounded-full opacity-50 group-hover:scale-150 transition-transform"></div>
+        <div class="relative z-10">
+          <div class="w-14 h-14 bg-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-purple-100 group-hover:rotate-6 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Long Questions</h2>
+          <p class="text-sm text-gray-400 mb-8 leading-relaxed">Prepare for essay-style exams with comprehensive detailed answer prompts.</p>
+          <div class="flex items-center justify-between pt-6 border-t border-gray-50">
+            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Available Questions</span>
+            <div class="bg-gray-100 text-gray-400 px-4 py-1 rounded-full text-lg font-black">0</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- AI Practice Mode (Locked) -->
+    <div class="ai-gradient rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
+      <div class="relative z-10">
+        <div class="flex items-start justify-between mb-8">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold mb-1">AI Practice Mode</h2>
+              <p class="text-gray-400 text-sm max-w-lg">Complete all questions with 100% course progress to unlock AI-generated practice questions.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-white/10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span class="text-xs font-bold uppercase tracking-widest">Locked</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-5 h-5 rounded-full border-2 border-white/20 flex items-center justify-center flex-shrink-0"></div>
+            <span class="text-white/80">Complete course progress (Currently: <span id="currentProgress">0%</span>)</span>
+          </div>
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-5 h-5 rounded-full border-2 border-white/20 flex items-center justify-center flex-shrink-0"></div>
+            <span class="text-white/80">Complete all questions (0/2)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative Brain Shadow -->
+      <svg class="absolute -right-20 -bottom-20 w-80 h-80 text-white/5" fill="currentColor" viewBox="0 0 24 24"><path d="M13,3C9.23,3,6.19,5.95,6,9.66C4.27,10.12,3,11.66,3,13.5c0,2,1.5,3.5,3.5,3.5h0.1c0.55,2.83,3.04,5,6.04,5c2.4,0,4.52-1.39,5.5-3.41 c0.16,0.01,0.33,0.02,0.5,0.02c2.4,0,4.4-1.61,4.92-3.8c1.32-0.5,2.22-1.78,2.22-3.2c0-1.88-1.48-3.41-3.34-3.49 C21.49,5.32,17.74,3,13,3z"/></svg>
+    </div>
+
+  </main>
+
+  <!-- JavaScript logic for fetching course data and updating links -->
+  <script>
+    async function initPractice() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const courseId = urlParams.get('id');
+
+      if (!courseId) {
+        window.location.href = 'courses.html';
+        return;
+      }
+
+      // Update Navigation Links
+      document.getElementById('backBtn').href = `course-details.html?id=${courseId}`;
+      document.getElementById('mcqLink').href = `mcq.html?id=${courseId}`;
+
+      try {
+        const response = await fetch('data/courses.json');
+        const data = await response.json();
+        const course = data.courses.find(c => c.id === courseId);
+
+        if (course) {
+          document.getElementById('courseName').textContent = course.name;
+          
+          // Load Progress
+          const completed = JSON.parse(localStorage.getItem(`aou_progress_${courseId}`) || '[]');
+          const percent = Math.round((completed.length / course.topicsCount) * 100);
+          document.getElementById('currentProgress').textContent = `${percent}%`;
+        }
+      } catch (err) {
+        console.error("Error loading practice data:", err);
+      }
+    }
+
+    initPractice();
+  </script>
+
+</body>
+</html>
