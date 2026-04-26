@@ -17,6 +17,7 @@
   
   <!-- Fonts & Stylesheets -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="config.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -163,7 +164,7 @@
               d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
         </div>
-        <p class="text-3xl font-bold text-gray-800 mb-1">6</p>
+        <p class="text-3xl font-bold text-gray-800 mb-1" id="enrolledCount">0</p>
         <p class="text-sm text-gray-400">Enrolled courses</p>
       </div>
       <!-- Upcoming Events -->
@@ -226,138 +227,8 @@
           <a href="courses.html" class="text-sm text-blue-600 hover:underline font-medium">View All →</a>
         </div>
 
-        <div class="flex flex-col gap-5">
-          <!-- Course 1 -->
-          <a href="course-details.html?id=MT101"
-            class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-            <div class="w-10 h-10 rounded-xl bg-green-500 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="text-sm font-semibold text-gray-800">General Mathematics</p>
-              <p class="text-xs text-gray-400 mb-2">MT101</p>
-              <div class="flex items-center gap-2">
-                <div class="flex-1 bg-gray-100 rounded-full h-1.5">
-                  <div id="progress-MT101" class="bg-green-500 h-1.5 rounded-full" style="width: 0%"></div>
-                </div>
-                <span id="text-MT101" class="text-xs text-gray-500 font-medium">0%</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Course 2 -->
-          <a href="course-details.html?id=M109"
-            class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-            <div class="w-10 h-10 rounded-xl bg-purple-500 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="text-sm font-semibold text-gray-800">.NET Programming</p>
-              <p class="text-xs text-gray-400 mb-2">M109</p>
-              <div class="flex items-center gap-2">
-                <div class="flex-1 bg-gray-100 rounded-full h-1.5">
-                  <div id="progress-M109" class="bg-purple-500 h-1.5 rounded-full" style="width: 0%"></div>
-                </div>
-                <span id="text-M109" class="text-xs text-gray-500 font-medium">0%</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Course 3 -->
-          <a href="course-details.html?id=M251"
-            class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-            <div class="w-10 h-10 rounded-xl bg-orange-400 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="text-sm font-semibold text-gray-800">Object-Oriented Programming using Java</p>
-              <p class="text-xs text-gray-400 mb-2">M251</p>
-              <div class="flex items-center gap-2">
-                <div class="flex-1 bg-gray-100 rounded-full h-1.5">
-                  <div id="progress-M251" class="bg-orange-400 h-1.5 rounded-full" style="width: 0%"></div>
-                </div>
-                <span id="text-M251" class="text-xs text-gray-500 font-medium">0%</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Course 4 -->
-          <a href="course-details.html?id=M105"
-            class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-            <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="text-sm font-semibold text-gray-800">Introduction to Programming</p>
-              <p class="text-xs text-gray-400 mb-2">M105</p>
-              <div class="flex items-center gap-2">
-                <div class="flex-1 bg-gray-100 rounded-full h-1.5">
-                  <div id="progress-M105" class="bg-blue-500 h-1.5 rounded-full" style="width: 0%"></div>
-                </div>
-                <span id="text-M105" class="text-xs text-gray-500 font-medium">0%</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Course 5 -->
-          <a href="course-details.html?id=M257"
-            class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-            <div class="w-10 h-10 rounded-xl bg-red-400 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="text-sm font-semibold text-gray-800">Database Management</p>
-              <p class="text-xs text-gray-400 mb-2">M257</p>
-              <div class="flex items-center gap-2">
-                <div class="flex-1 bg-gray-100 rounded-full h-1.5">
-                  <div id="progress-M257" class="bg-red-400 h-1.5 rounded-full" style="width: 0%"></div>
-                </div>
-                <span id="text-M257" class="text-xs text-gray-500 font-medium">0%</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Course 6 -->
-          <a href="course-details.html?id=TT284"
-            class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-            <div class="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="text-sm font-semibold text-gray-800">Web Development Fundamentals</p>
-              <p class="text-xs text-gray-400 mb-2">TT284</p>
-              <div class="flex items-center gap-2">
-                <div class="flex-1 bg-gray-100 rounded-full h-1.5">
-                  <div id="progress-TT284" class="bg-teal-500 h-1.5 rounded-full" style="width: 0%"></div>
-                </div>
-                <span id="text-TT284" class="text-xs text-gray-500 font-medium">0%</span>
-              </div>
-            </div>
-          </a>
+        <div class="flex flex-col gap-5" id="homeCoursesList">
+          <!-- سيتم التعبئة بواسطة JavaScript -->
         </div>
       </div>
 
@@ -638,11 +509,10 @@
 
     render();
 
-    // ── PROGRESS TRACKING ──────────────────────────────────────
+    // ── PROGRESS TRACKING FROM BACKEND ──────────────────────────────
     async function loadCourseProgress() {
-      const defaultCourses = ['MT101', 'M109', 'M251', 'TM103', 'MT131', 'MT132'];
       let selectedIds = JSON.parse(localStorage.getItem('aou_selected_courses'));
-      
+      const defaultCourses = ['MT101', 'M109', 'M251', 'TM103', 'MT131', 'MT132'];
       if (!selectedIds) {
         selectedIds = defaultCourses;
         localStorage.setItem('aou_selected_courses', JSON.stringify(defaultCourses));
@@ -652,11 +522,9 @@
       if (enrolledLabel) enrolledLabel.textContent = selectedIds.length;
 
       try {
-        const response = await fetch('data/courses.json');
-        const data = await response.json();
-        const allCourses = data.courses;
-
-        const courses = allCourses.filter(c => selectedIds.includes(c.id));
+        const response = await fetch(`${API_URL}/api/subjects`);
+        const allCourses = await response.json();
+        const courses = allCourses.filter(c => selectedIds.includes(c.name));
         const listContainer = document.getElementById('homeCoursesList');
         
         if (listContainer) {
@@ -664,19 +532,19 @@
             listContainer.innerHTML = '<p class="text-xs text-gray-400 text-center py-4 italic">No courses selected.</p>';
           } else {
             listContainer.innerHTML = courses.map(course => {
-              const id = course.id;
-              const topics = course.topicsCount;
+              const id = course.name;
+              const topics = course.totalQuestions;
               const completed = JSON.parse(localStorage.getItem(`aou_progress_${id}`) || '[]');
               const count = completed.length;
-              const percent = Math.round((count / topics) * 100);
+              const percent = topics > 0 ? Math.round((count / topics) * 100) : 0;
               return `
                 <a href="course-details.html?id=${id}" class="flex items-start gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all group">
-                  <div class="w-10 h-10 rounded-xl ${course.color} flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform">
+                  <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                   </div>
                   <div class="flex-1">
                     <div class="flex items-center justify-between mb-1">
-                      <p class="text-sm font-bold text-gray-800 truncate max-w-[150px]">${course.name}</p>
+                      <p class="text-sm font-bold text-gray-800 truncate max-w-[150px]">${course.description}</p>
                       <span class="text-[9px] font-black text-gray-300 uppercase tracking-widest">${id}</span>
                     </div>
                     <div class="flex items-center gap-3">
@@ -695,13 +563,13 @@
         let totalCompleted = 0;
         let totalTopics = 0;
 
-        courses.forEach(course => {
-          const id = course.id;
-          const topics = course.topicsCount;
+        for (const course of courses) {
+          const id = course.name;
+          const topics = course.totalQuestions;
           const completed = JSON.parse(localStorage.getItem(`aou_progress_${id}`) || '[]');
           totalCompleted += completed.length;
           totalTopics += topics;
-        });
+        }
 
         const overallPercent = totalTopics > 0 ? Math.round((totalCompleted / totalTopics) * 100) : 0;
         const overallText = document.getElementById('overallProgressText');
@@ -718,5 +586,4 @@
   </script>
 
 </body>
-
 </html>
