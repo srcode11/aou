@@ -1,0 +1,150 @@
+{
+  "courses": [
+    {
+      "id": "MT101",
+      "name": "General Mathematics",
+      "topicsCount": 14,
+      "color": "bg-green-500",
+      "units": ["Logic and Set Theory", "Functions and Relations", "Algebraic Expressions", "Quadratic Equations", "Matrices and Determinants", "Sequences and Series", "Permutations and Combinations", "Trigonometry Basics", "Calculus: Limits", "Calculus: Derivatives", "Calculus: Integration", "Vector Algebra", "Probability Theory", "Statistical Methods"],
+      "quiz": [
+        { "question": "What is the value of 2^3?", "options": ["4", "6", "8", "10"], "answer": 2 },
+        { "question": "Which of these is a prime number?", "options": ["4", "9", "15", "17"], "answer": 3 }
+      ]
+    },
+    {
+      "id": "M109",
+      "name": ".NET Programming",
+      "topicsCount": 9,
+      "color": "bg-purple-500",
+      "units": ["C# Language Basics", "Object-Oriented Programming (OOP)", "Exception Handling", "Collections and Generics", "LINQ Queries", "Asynchronous Programming", "Entity Framework Core", "ASP.NET Core Web API", "Unit Testing in .NET"],
+      "quiz": [
+        { "question": "Which keyword is used to inherit a class in C#?", "options": ["inherits", "extends", ":", "static"], "answer": 2 },
+        { "question": "What is the entry point of a C# console application?", "options": ["Run()", "Start()", "Execute()", "Main()"], "answer": 3 }
+      ]
+    },
+    {
+      "id": "M251",
+      "name": "Object-Oriented Programming using Java",
+      "topicsCount": 12,
+      "color": "bg-orange-400",
+      "units": ["Classes and Objects", "Inheritance and Polymorphism", "Interfaces and Abstract Classes", "Generics", "Java Collections Framework", "Input/Output Streams", "Multithreading", "Network Programming", "JDBC Database Connection", "Java Reflection API", "Design Patterns (Singleton, Factory)", "Modern Java Features (Lambdas)"],
+      "quiz": [
+        { "question": "Which keyword is used to create a class in Java?", "options": ["class", "Class", "new", "object"], "answer": 0 },
+        { "question": "Which data type is used to create a variable that should store text?", "options": ["myString", "string", "String", "Txt"], "answer": 2 }
+      ]
+    },
+    {
+      "id": "TM103",
+      "name": "Computer Organization and Architecture",
+      "topicsCount": 12,
+      "color": "bg-blue-500",
+      "units": ["Number Systems and Logic Gates", "Boolean Algebra", "Combinational Logic", "Sequential Circuits", "Memory Hierarchy", "CPU Structure", "Instruction Set Architecture", "Addressing Modes", "Pipelining", "Cache Memory", "Virtual Memory", "Input/Output Organization"],
+      "quiz": [
+        { "question": "Which memory is the fastest?", "options": ["RAM", "Register", "Cache", "Hard Disk"], "answer": 1 },
+        { "question": "What does CPU stand for?", "options": ["Central Process Unit", "Central Processing Unit", "Computer Program Unit", "Core Processing Unit"], "answer": 1 }
+      ]
+    },
+    {
+      "id": "MT131",
+      "name": "Discrete Mathematics",
+      "topicsCount": 10,
+      "color": "bg-green-500",
+      "units": ["Propositional Logic", "Predicate Logic", "Proof Techniques", "Recursion and Induction", "Set Operations", "Relations and Properties", "Graph Theory Basics", "Trees and Algorithms", "Boolean Functions", "Computational Complexity"],
+      "quiz": [
+        { "question": "What is the truth value of (True AND False)?", "options": ["True", "False"], "answer": 1 },
+        { "question": "In set theory, what is ∅?", "options": ["Zero set", "Empty set", "Full set", "Subset"], "answer": 1 }
+      ]
+    },
+    {
+      "id": "MT132",
+      "name": "Linear Algebra",
+      "topicsCount": 14,
+      "color": "bg-purple-500",
+      "units": ["Systems of Linear Equations", "Matrix Operations", "Determinants", "Vector Spaces", "Subspaces", "Linear Combinations", "Span and Basis", "Dimension and Rank", "Linear Transformations", "Eigenvalues and Eigenvectors", "Diagonalization", "Inner Product Spaces", "Orthogonality", "Symmetric Matrices"],
+      "quiz": [
+        { "question": "What is a matrix with equal number of rows and columns called?", "options": ["Rectangle Matrix", "Equal Matrix", "Square Matrix", "Identity Matrix"], "answer": 2 },
+        { "question": "A determinant of 0 means the matrix is:", "options": ["Invertible", "Singular", "Identity", "Zero"], "answer": 1 }
+      ]
+    },
+    {
+      "id": "TM111",
+      "name": "Introduction to Computing and Information Technology I",
+      "topicsCount": 10,
+      "color": "bg-blue-400",
+      "units": ["Digital World", "Communicating Electronically", "Information and Storage", "Design for Use", "Ethics and Security", "Computing History", "Hardware Layers", "Operating Systems", "Networking Basics", "Web Technologies"],
+      "quiz": [
+        { "question": "What does IT stand for?", "options": ["Internet Technology", "Information Technology", "Interim Technology", "Integrated Tools"], "answer": 1 }
+      ]
+    },
+    {
+      "id": "TM112",
+      "name": "Introduction to Computing and Information Technology II",
+      "topicsCount": 12,
+      "color": "bg-pink-500",
+      "units": ["Object-Oriented Concepts", "UI Design", "Database Systems", "Web Architecture", "Software Development Lifecycle", "Data Representation", "Algorithmic Thinking", "Problem Solving", "Collaboration Tools", "Advanced Programming", "Security in IT", "Future Trends"],
+      "quiz": [
+        { "question": "Which phase comes after 'Requirement Analysis'?", "options": ["Testing", "Deployment", "Design", "Maintenance"], "answer": 2 }
+      ]
+    },
+    {
+      "id": "TM105",
+      "name": "Introduction to Programming",
+      "topicsCount": 10,
+      "color": "bg-green-500",
+      "units": ["Variables and Constants", "Conditional Statements", "Loops and Iteration", "Functions and Procedures", "Arrays and Lists", "Working with Files", "Debugging Techniques", "Recursion", "Software Quality", "Final Project"],
+      "quiz": [
+        { "question": "Which loop is used when the number of iterations is known?", "options": ["While", "For", "Do-While", "Until"], "answer": 1 }
+      ]
+    },
+    {
+      "id": "M269",
+      "name": "Algorithms, Data Structures and Computability",
+      "topicsCount": 14,
+      "color": "bg-blue-600",
+      "units": ["Stack and Queues", "Linked Lists", "Complexity Analysis", "Sorting Algorithms", "Searching Algorithms", "Binary Search Trees", "Hash Tables", "Graphs and Traversals", "Dynamic Programming", "Greedy Algorithms", "Divide and Conquer", "NP-Completeness", "State Machines", "Turing Machines"],
+      "quiz": [
+        { "question": "What is the Big O complexity of Binary Search?", "options": ["O(n)", "O(log n)", "O(n^2)", "O(1)"], "answer": 1 }
+      ]
+    },
+    {
+      "id": "MT129",
+      "name": "Calculus and Probability",
+      "topicsCount": 12,
+      "color": "bg-green-500",
+      "units": ["Functions and Graphs", "Differential Calculus", "Integral Calculus", "Multivariate Calculus", "Differential Equations", "Set Theory in Probability", "Conditional Probability", "Random Variables", "Probability Distributions", "Statistical Inference", "Hypothesis Testing", "Regression Analysis"],
+      "quiz": [
+        { "question": "What is the derivative of x^2?", "options": ["x", "2x", "x^3", "2"], "answer": 1 }
+      ]
+    },
+    {
+      "id": "T227",
+      "name": "Change, Strategy and Project at Work",
+      "topicsCount": 8,
+      "color": "bg-pink-500",
+      "units": ["Organizational Change", "Strategic Planning", "Project Management Basics", "Risk Assessment", "Stakeholder Management", "Team Leadership", "Performance Metrics", "Future Strategy"],
+      "quiz": [
+        { "question": "What is a SWOT analysis?", "options": ["Strength, Weakness, Office, Time", "Strength, Weakness, Opportunity, Threat", "Strategy, Work, Organization, Task", "Small, Weak, Old, Tough"], "answer": 1 }
+      ]
+    },
+    {
+      "id": "TM351",
+      "name": "Data Management and Analysis",
+      "topicsCount": 14,
+      "color": "bg-orange-600",
+      "units": ["Relational Databases", "SQL Advanced", "NoSQL Systems", "Data Warehousing", "Data Cleaning", "Data Visualization", "Statistical Analysis with R", "Machine Learning Basics", "Big Data Architecture", "Cloud Computing for Data", "Data Ethics", "Privacy and Security", "Predictive Modeling", "Real-world Data Projects"],
+      "quiz": [
+        { "question": "Which SQL command is used to retrieve data?", "options": ["INSERT", "UPDATE", "SELECT", "DELETE"], "answer": 2 }
+      ]
+    },
+    {
+      "id": "TM298",
+      "name": "Operating Systems",
+      "topicsCount": 12,
+      "color": "bg-red-500",
+      "units": ["Process Management", "CPU Scheduling", "Inter-Process Communication", "Deadlocks", "Memory Management", "Paging and Segmentation", "File System Interface", "Storage Structure", "Input-Output Systems", "Security and Protection", "Distributed Systems", "Case Studies (Linux/Windows)"],
+      "quiz": [
+        { "question": "Which scheduling algorithm is 'Shortest Job First'?", "options": ["FCFS", "SJF", "RR", "Priority"], "answer": 1 }
+      ]
+    }
+  ]
+}

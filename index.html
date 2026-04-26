@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Site Title -->
+  <title>Login | AOU Study Tracker</title>
+  
+  <!-- SEO Metadata -->
+  <meta name="description" content="AOU Study Tracker - Manage your courses, track progress, and excel in your studies at Arab Open University." />
+  <meta name="keywords" content="AOU, Study Tracker, Arab Open University, Student Portal, Course Management" />
+  <meta name="author" content="AOU Study Tracker Team" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  
+  <!-- Stylesheets -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <!-- Main Background Wrapper -->
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <!-- Login Card Container -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+      <!-- Header Section: Logo and Welcome Text -->
+      <div class="flex flex-col items-center mb-8">
+        <img src="img/logo.png" alt="AOU Study Tracker" class="w-32 h-32 mb-4" />
+        <h1 class="text-3xl font-bold text-gray-800">AOU Study Tracker</h1>
+        <p class="text-gray-600 mt-2">Sign in to your account</p>
+      </div>
+
+      <!-- Login Form -->
+      <form class="space-y-6" id="loginForm">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label><input type="email"
+            id="email"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            placeholder="Enter your email" required="" value="" />
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label><input
+            type="password" id="password"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            placeholder="Enter your password" required="" value="" />
+        </div>
+        <button type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+          Login
+        </button>
+      </form>
+      <div class="mt-6 text-center">
+        <p class="text-gray-600">
+          Don't have an account?
+          <a class="text-blue-600 hover:text-blue-700 font-medium" href="register.html" data-discover="true">Register
+            here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // Handle form submission to redirect to dashboard
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      window.location.href = 'home.html';
+    });
+  </script>
+</body>
+
+</html>
