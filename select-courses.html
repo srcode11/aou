@@ -17,6 +17,7 @@
   
   <!-- Stylesheets & Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="config.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     body { font-family: 'Inter', sans-serif; }
@@ -86,24 +87,24 @@
       }
 
       try {
-        const response = await fetch('data/courses.json');
-        const data = await response.json();
-        allCourses = data.courses;
+        const response = await fetch(`${API_URL}/api/subjects`);
+        allCourses = await response.json();
         renderCourses();
         updateCounter();
       } catch (err) {
         console.error("Failed to load courses:", err);
+        document.getElementById('coursesGrid').innerHTML = '<div class="col-span-full text-center py-20 text-red-400">Error loading courses. Make sure the backend is running.</div>';
       }
     }
 
     function renderCourses() {
       const grid = document.getElementById('coursesGrid');
       grid.innerHTML = allCourses.map(course => `
-        <div onclick="toggleCourse('${course.id}')" 
-             id="card-${course.id}" 
-             class="course-card ${selectedIds.has(course.id) ? 'selected' : ''} bg-white rounded-3xl p-6 border-2 border-gray-50 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all cursor-pointer group flex flex-col h-full">
+        <div onclick="toggleCourse('${course.name}')" 
+             id="card-${course.name}" 
+             class="course-card ${selectedIds.has(course.name) ? 'selected' : ''} bg-white rounded-3xl p-6 border-2 border-gray-50 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all cursor-pointer group flex flex-col h-full">
           <div class="flex justify-between items-start mb-6">
-            <div class="w-14 h-14 ${course.color} rounded-2xl flex items-center justify-center shadow-lg shadow-gray-100 group-hover:rotate-6 transition-transform">
+            <div class="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-100 group-hover:rotate-6 transition-transform">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
             </div>
             <div class="check-container flex items-center justify-center">
@@ -111,8 +112,8 @@
             </div>
           </div>
           <div class="flex-1">
-            <h2 class="text-2xl font-black text-gray-900 mb-2">${course.id}</h2>
-            <p class="text-sm text-gray-500 font-bold leading-relaxed line-clamp-2">${course.name}</p>
+            <h2 class="text-2xl font-black text-gray-900 mb-2">${course.name}</h2>
+            <p class="text-sm text-gray-500 font-bold leading-relaxed line-clamp-2">${course.description}</p>
           </div>
           <div class="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
              <span class="text-[10px] font-black uppercase tracking-widest text-gray-300">AOU Course</span>
@@ -150,5 +151,4 @@
     init();
   </script>
 </body>
-
 </html>
