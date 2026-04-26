@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Details | AOU Study Tracker</title>
+  <meta name="description" content="View detailed progress for your AOU course, track unit completions, and access practice materials." />
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .checkbox-custom:checked { background-color: #2563eb; border-color: #2563eb; }
+    .progress-ring__circle { transition: stroke-dashoffset 0.35s; transform: rotate(-90deg); transform-origin: center; transform-box: fill-box; }
+  </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+
+  <nav class="bg-white border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="home.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <img src="img/logo.png" alt="AOU Logo" class="w-9 h-9 rounded-full object-cover" />
+        <span class="font-bold text-gray-800 text-lg">AOU Study Tracker</span>
+      </a>
+      <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="home.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">Dashboard</a>
+        <a href="courses.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">Courses</a>
+        <a href="index.html" class="flex items-center gap-1.5 hover:text-red-500 transition-colors">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    <a href="courses.html" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors mb-6 group">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Back to Courses
+    </a>
+
+    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm mb-8 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+      <div id="courseIconBox" class="w-24 h-24 rounded-3xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-orange-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+      </div>
+      <div class="flex-1 text-center lg:text-left">
+        <h1 id="courseName" class="text-3xl md:text-4xl font-black text-gray-900 mb-2">Loading...</h1>
+        <p id="courseCode" class="text-xl text-blue-600 font-bold mb-4 uppercase tracking-widest opacity-80">CODE</p>
+        <div class="flex flex-col md:flex-row items-center gap-4 justify-center lg:justify-start">
+          <div class="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-2xl border border-gray-100">
+            <span class="px-2 py-0.5 bg-green-500 text-white rounded-md text-[10px] font-bold uppercase tracking-wider">Active</span>
+            <span id="topicCountDetail" class="text-sm font-bold text-gray-700">0 / 0</span>
+          </div>
+          <p id="remainingTopics" class="text-sm text-gray-400 font-semibold italic">Calculating topics...</p>
+        </div>
+      </div>
+      <div class="relative flex items-center justify-center flex-shrink-0">
+        <svg class="w-32 h-32 md:w-40 md:h-40" viewBox="0 0 128 128">
+          <circle class="text-gray-100" stroke-width="8" stroke="currentColor" fill="transparent" r="58" cx="64" cy="64"></circle>
+          <circle id="progressCircle" class="text-blue-600 progress-ring__circle" stroke-width="8" stroke-dasharray="364.4" stroke-dashoffset="364.4" stroke-linecap="round" stroke="currentColor" fill="transparent" r="58" cx="64" cy="64"></circle>
+        </svg>
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span id="percentText" class="text-2xl md:text-3xl font-black text-gray-900">0%</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Progress</span>
+        </div>
+      </div>
+      <div class="flex-shrink-0">
+        <a id="startPracticeBtn" href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-5 rounded-3xl font-black text-lg flex items-center gap-4 transition-all transform hover:scale-105 active:scale-95 shadow-2xl shadow-blue-200">
+          <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          Start Practice
+        </a>
+      </div>
+    </div>
+
+    <div class="space-y-4" id="topicsContainer"></div>
+  </main>
+
+  <script>
+    let courseInfo = null;
+    let completedTopics = [];
+    let courseId = "";
+
+    async function initPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      courseId = urlParams.get('id');
+      if (!courseId) {
+        window.location.href = 'courses.html';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/subjects/${courseId}`);
+        courseInfo = await response.json();
+        if (!courseInfo || courseInfo.error) {
+          window.location.href = 'courses.html';
+          return;
+        }
+
+        const STORAGE_KEY = `aou_progress_${courseId}`;
+        completedTopics = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        renderHeader();
+        renderTopics();
+        document.getElementById('startPracticeBtn').href = `practice.html?id=${courseId}`;
+      } catch (error) {
+        console.error("Error loading course data:", error);
+      }
+    }
+
+    function renderHeader() {
+      document.getElementById('courseName').textContent = courseInfo.description || courseInfo.name;
+      document.getElementById('courseCode').textContent = courseInfo.name;
+      updateProgressUI();
+    }
+
+    function renderTopics() {
+      const container = document.getElementById('topicsContainer');
+      container.innerHTML = '';
+      if (!courseInfo.topics) {
+        container.innerHTML = '<div class="text-center py-10 text-gray-400">No topics available for this course.</div>';
+        return;
+      }
+      courseInfo.topics.forEach((title, index) => {
+        const i = index + 1;
+        const isCompleted = completedTopics.includes(i);
+        const div = document.createElement('div');
+        div.className = `bg-white border rounded-xl p-4 flex items-center justify-between shadow-sm transition-all ${isCompleted ? 'border-blue-200 bg-blue-50/30' : 'border-gray-200 hover:border-blue-300'}`;
+        div.innerHTML = `
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-lg ${isCompleted ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-400'} flex items-center justify-center font-bold text-sm transition-colors">${i}</div>
+            <div>
+              <h3 class="font-semibold ${isCompleted ? 'text-blue-900 line-through opacity-70' : 'text-gray-800'}">${title}</h3>
+              <p class="text-xs text-gray-400">Unit ${i} • Core concepts and exercises</p>
+            </div>
+          </div>
+          <input type="checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleTopic(${i})" class="w-6 h-6 rounded-lg border-2 border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer transition-all checkbox-custom shadow-inner">
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleTopic(index) {
+      const STORAGE_KEY = `aou_progress_${courseId}`;
+      if (completedTopics.includes(index)) {
+        completedTopics = completedTopics.filter(id => id !== index);
+      } else {
+        completedTopics.push(index);
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(completedTopics));
+      updateProgressUI();
+      renderTopics();
+    }
+
+    function updateProgressUI() {
+      const total = courseInfo.topics ? courseInfo.topics.length : 0;
+      const done = completedTopics.length;
+      const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+      document.getElementById('percentText').textContent = `${percent}%`;
+      document.getElementById('topicCountDetail').textContent = `${done} / ${total}`;
+      const remLabel = document.getElementById('remainingTopics');
+      const remaining = total - done;
+      if (remaining === 0) {
+        remLabel.textContent = "All topics completed! 🎉";
+        remLabel.classList.replace('text-gray-400', 'text-green-500');
+      } else {
+        remLabel.textContent = `${remaining} topic${remaining > 1 ? 's' : ''} remaining`;
+        remLabel.classList.replace('text-green-500', 'text-gray-400');
+      }
+      const circle = document.getElementById('progressCircle');
+      if (circle) {
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (percent / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+      }
+    }
+    initPage();
+  </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Site Title -->
+  <title>Select Courses | AOU Study Tracker</title>
+  
+  <!-- SEO Metadata -->
+  <meta name="description" content="Personalize your AOU Study Tracker by selecting the courses you are enrolled in this semester." />
+  <meta name="keywords" content="Course Selection, AOU, Student Portal, Study Plan" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  
+  <!-- Stylesheets & Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .course-card.selected { border-color: #2563eb; background-color: #eff6ff; }
+    .course-card.selected .check-container { background-color: #2563eb; border-color: #2563eb; }
+    .course-card.selected .check-icon { display: block; }
+    .check-icon { display: none; }
+    .check-container { width: 24px; height: 24px; border: 2px solid #e5e7eb; border-radius: 50%; transition: all 0.2s; }
+  </style>
+</head>
+
+<body class="bg-[#F8FAFC] min-h-screen pb-24">
+
+  <nav class="bg-white border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="img/logo.png" alt="AOU Logo" class="w-10 h-10 rounded-full object-cover" />
+        <span class="font-black text-gray-900 text-xl tracking-tight">AOU Study Tracker</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    
+    <!-- Top Selector Card -->
+    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm mb-10 flex flex-col md:flex-row items-center gap-6">
+      <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+      </div>
+      <div class="flex-1 text-center md:text-left">
+        <h1 class="text-3xl font-black text-gray-900 mb-1">Select Your Semester Courses</h1>
+        <p class="text-gray-400 font-medium">Choose the courses you're taking this semester</p>
+      </div>
+      <div class="bg-blue-50 px-6 py-3 rounded-2xl border border-blue-100">
+        <span id="selectedCount" class="text-blue-700 font-black text-lg">0</span>
+        <span class="text-blue-600 font-bold text-sm ml-1 uppercase tracking-wide">courses selected</span>
+      </div>
+    </div>
+
+    <!-- Courses Grid -->
+    <div id="coursesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <!-- Cards will be injected by JS -->
+    </div>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-gray-100 p-4 z-50">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <p class="text-sm text-gray-400 font-medium hidden md:block">You can edit your course selection anytime from the courses page</p>
+        <button id="saveBtn" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-[1.02] active:scale-95 shadow-2xl shadow-blue-200">
+          Save & Continue
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- JavaScript logic for course selection and persistence -->
+  <script>
+    let allCourses = [];
+    let selectedIds = new Set();
+
+    async function init() {
+      // Load existing selection if any
+      const saved = localStorage.getItem('aou_selected_courses');
+      if (saved) {
+        JSON.parse(saved).forEach(id => selectedIds.add(id));
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/subjects`);
+        allCourses = await response.json();
+        renderCourses();
+        updateCounter();
+      } catch (err) {
+        console.error("Failed to load courses:", err);
+        document.getElementById('coursesGrid').innerHTML = '<div class="col-span-full text-center py-20 text-red-400">Error loading courses. Make sure the backend is running.</div>';
+      }
+    }
+
+    function renderCourses() {
+      const grid = document.getElementById('coursesGrid');
+      grid.innerHTML = allCourses.map(course => `
+        <div onclick="toggleCourse('${course.name}')" 
+             id="card-${course.name}" 
+             class="course-card ${selectedIds.has(course.name) ? 'selected' : ''} bg-white rounded-3xl p-6 border-2 border-gray-50 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all cursor-pointer group flex flex-col h-full">
+          <div class="flex justify-between items-start mb-6">
+            <div class="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-100 group-hover:rotate-6 transition-transform">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <div class="check-container flex items-center justify-center">
+              <svg class="check-icon w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-2xl font-black text-gray-900 mb-2">${course.name}</h2>
+            <p class="text-sm text-gray-500 font-bold leading-relaxed line-clamp-2">${course.description}</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
+             <span class="text-[10px] font-black uppercase tracking-widest text-gray-300">AOU Course</span>
+             <span class="text-[10px] font-black uppercase tracking-widest text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">Select Subject</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleCourse(id) {
+      const card = document.getElementById(`card-${id}`);
+      if (selectedIds.has(id)) {
+        selectedIds.delete(id);
+        card.classList.remove('selected');
+      } else {
+        selectedIds.add(id);
+        card.classList.add('selected');
+      }
+      updateCounter();
+    }
+
+    function updateCounter() {
+      document.getElementById('selectedCount').textContent = selectedIds.size;
+    }
+
+    document.getElementById('saveBtn').onclick = () => {
+      if (selectedIds.size === 0) {
+        alert("Please select at least one course.");
+        return;
+      }
+      localStorage.setItem('aou_selected_courses', JSON.stringify(Array.from(selectedIds)));
+      window.location.href = 'home.html';
+    };
+
+    init();
+  </script>
+</body>
+</html>
